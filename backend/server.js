@@ -1,6 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose'; 
 import dotenv from 'dotenv';
+import userRoute from './routes/userRoute.js';
+import blogRoute from './routes/blogRoute.js';
+import authRoute from './routes/authRoute.js';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser'
+import cors from 'cors';
 
 const app = express();
 dotenv.config();
@@ -16,6 +22,14 @@ const connect = async () => {
     }
 };
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.json());
+app.use(cookieParser());
+app.use("/backend/users", userRoute);
+app.use("/backend/blog", blogRoute); 
+app.use("/backend/user_auth", authRoute);
 
 
 app.listen(5000, () => {

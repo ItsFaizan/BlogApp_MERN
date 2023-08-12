@@ -1,12 +1,12 @@
 import express from "express";
 import { CreateBlog, updateblog, getblog, deleteblog, searchBlogs} from "../controllers/blogController.js";
+import { verifyToken } from '../middleware/jwt.js';
+const blogRoute = express.Router();
 
-const router = express.Router();
+blogRoute.post("/upload",verifyToken, CreateBlog);
+blogRoute.put("/:id",verifyToken, updateblog);
+blogRoute.delete("/:id",verifyToken, deleteblog);
+blogRoute.get("/:id",verifyToken, getblog);
+blogRoute.get("/search",verifyToken, searchBlogs);
 
-router.post("/upload",verifyToken, CreateBlog);
-router.put("/:id",verifyToken, updateblog);
-router.delete("/:id",verifyToken, deleteblog);
-router.get("/:id",verifyToken, getblog);
-router.get("/search",verifyToken, searchBlogs);
-
-export default router;
+export default blogRoute;

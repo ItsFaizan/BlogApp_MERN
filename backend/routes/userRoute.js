@@ -3,10 +3,10 @@ import { deleteUser } from '../controllers/userController.js';
 import { updateuser } from '../controllers/userController.js';
 import { getUser } from '../controllers/userController.js';
 import { verifyToken } from '../middleware/jwt.js';
-const router = express.Router();
+const userRoute = express.Router();
 
-router.delete("/:id",verifyToken, deleteUser)
-router.put("/:id",verifyToken, updateuser)
-router.get("/get_user_info/:id",verifyToken, getUser)
+userRoute.delete("/:id",verifyToken, deleteUser)
+userRoute.put("/:id",verifyToken, updateuser)
+userRoute.get("/get_user_info/:id",verifyToken, getUser)
 
-export default router;
+export default userRoute;

@@ -13,7 +13,7 @@ export const register = async (req, res, next) => {
     await newUser.save();
     res.status(201).send("User has been created.");
   } catch (err) {
-    next(err);
+    res.status(500).json({ error: 'An error occurred.' });
   }
 };
 export const login = async (req, res, next) => {
@@ -46,10 +46,10 @@ export const login = async (req, res, next) => {
       process.env.JWT_KEY
     );
 
+
     const { password, ...info } = user._doc;
     res
       .cookie("accessToken", token)
-      
       .status(200)
       .send(info);
   } catch (err) {

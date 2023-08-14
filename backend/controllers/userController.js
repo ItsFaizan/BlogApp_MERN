@@ -31,11 +31,10 @@ export const updateuser = async (req, res) => {
         res.status(500).json({error: "Can't update user"})
     }
 
-};
-
-       
+};    
            
 export const getUser = async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const userid = req.userid;
+  const user = await User.findById(userid);
   res.json({user});
 };

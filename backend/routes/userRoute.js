@@ -7,6 +7,6 @@ const userRoute = express.Router();
 
 userRoute.delete("/:id",verifyToken, deleteUser)
 userRoute.put("/:id",verifyToken, updateuser)
-userRoute.get("/get_user_info/:id",verifyToken, getUser)
+userRoute.get("/get_user_info",verifyToken, getUser)
 
 export default userRoute;

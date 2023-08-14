@@ -14,7 +14,7 @@ function Register()  {
     
         
           try {
-            const response = await fetch('http://localhost:5000/backend/user_auth/user_register', {
+            const response = await fetch('/backend/user_auth/user_register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -27,10 +27,6 @@ function Register()  {
                 password: password
               }),
             });
-    
-            const data = await response.json();
-        
-            console.log(data);
         } catch (error) {
           console.error(error);
         }
@@ -60,7 +56,7 @@ function Register()  {
 
                         <div className='flex flex-col text-gray-400 py-2'>
                             <label>Full Name</label>
-                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" placeholder="User Name"  value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                            <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" placeholder="Full Name"  value={fullName} onChange={(e) => setFullName(e.target.value)} />
                         </div>
                         <div className='flex flex-col text-gray-400 py-2'>
                             <label>Email</label>
@@ -123,6 +119,7 @@ function Register()  {
     </div>
 
                         <button className='w-full my-5 py-2 bg-teal-500 shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg ' type="submit">Sign Up</button>
+                        
                     </form>
                 </div>
             </div>

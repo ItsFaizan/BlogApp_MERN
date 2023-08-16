@@ -1,5 +1,6 @@
 import { Landingpage } from "./components/Landingpage";
 import Login from "./components/Login";
+import { Navbar } from "./components/Navbar";
 import Register from "./components/Register";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -9,7 +10,7 @@ function App() {
        <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/landingpage" element={<Landingpage />} />
+          <Route path="/landingpage" element={<div><Navbar/><Landingpage /></div>} />
        </Routes>
     </BrowserRouter>
 

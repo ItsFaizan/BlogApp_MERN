@@ -57,7 +57,7 @@ function Login()  {
                         <button className='w-full my-5 py-2 bg-teal-500 shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg ' type="submit">Sign In</button>
                         <div className='flex justify-between text-gray-400 py-2'>
                             <p className='flex items-center'>Don't have an account?</p>
-                            <button className='w-[15vh] my-5 py-2 bg-teal-500 shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg '> <Link to="/register">Sign Up</Link></button>
+                            <Link to="/register"><button className='w-[15vh] my-5 py-2 bg-teal-500 shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg '> Sign Up</button></Link>
                         </div>
                     </form>
                 </div>

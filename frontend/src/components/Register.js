@@ -1,6 +1,7 @@
 import React from 'react';
 import loginImg from '../assets/login.jpg'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 function Register()  {
 
     const [email, setEmail] = useState('');
@@ -119,7 +120,10 @@ function Register()  {
     </div>
 
                         <button className='w-full my-5 py-2 bg-teal-500 shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg ' type="submit">Sign Up</button>
-                        
+                        <div className='flex justify-between text-gray-400'>
+                            <p className='flex items-center'>Return to Login </p>
+                            <Link to="/"> <button className='w-[15vh] my-1 py-2 bg-teal-500 shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg '> Login</button></Link>
+                        </div>
                     </form>
                 </div>
             </div>

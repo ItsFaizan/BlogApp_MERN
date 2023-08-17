@@ -4,10 +4,10 @@ const { Schema } = mongoose;
 const blogSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: false
   },
   content: {
-    type: String,
+    type: [Object],
     required: true
   },
   images: {
@@ -17,10 +17,11 @@ const blogSchema = new Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   claps: {
     type: Number,
+    required: false,
     default: 0
   },
   comments: [
@@ -28,11 +29,11 @@ const blogSchema = new Schema({
       user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: false
       },
       text: {
         type: String,
-        required: true
+        required: false
       },
       createdAt: {
         type: Date,

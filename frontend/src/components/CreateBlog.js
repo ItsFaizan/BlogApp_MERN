@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import landingimg from '../assets/blue-surface-with-study-tools.jpg';
+import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export const CreateBlog = ({ userId }) => {
@@ -7,12 +9,13 @@ export const CreateBlog = ({ userId }) => {
   const [inputValue, setInputValue] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [contentExists, setContentExists] = useState(false);
+  const [cookies] = useCookies(['accessToken']);
+  const navigate = useNavigate();
 
   const handleAddHeading = () => {
     setContent([...content, { type: 'heading', text: inputValue }]);
     setInputValue('');
-    setContentExists(true); // Update the state
-    console.log("Content exists:", contentExists);
+    setContentExists(true); 
   };
 
   const handleAddParagraph = () => {
@@ -25,11 +28,33 @@ export const CreateBlog = ({ userId }) => {
     setImageUrl('');
   };
 
-  const handleSaveBlog = () => {
+  
+  const handleSaveBlog =async (e) => {
+    e.preventDefault();
+    
+        
+    try {
+      const response = await fetch('/backend/blog/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+        body: JSON.stringify({
+          content: content,  
+        }),
+       
+      });
+  } catch (error) {
+    console.error(error);
+  }
   };
+
+  
   return (
 
     <div className=" pb-4 px-4 ">
+      <form className='z-10' onSubmit={handleSaveBlog}>
   <div
     className="absolute inset-0 flex flex-col justify-center items-center p-8 sm:p-16 lg:p-32"
     style={{
@@ -114,13 +139,20 @@ export const CreateBlog = ({ userId }) => {
           )}
         </div>
       </div>
+      
       <button
          className="mt-4 px-6 py-2 bg-gray-600 text-white rounded transition duration-300 hover:text-gray-950 hover:bg-white z-10"
-        onClick={handleSaveBlog}
+         type="submit" 
       >
+       <Link to="/landingpage">
         Publish
+        </Link>
+       
       </button>
-      </div> 
+     
+     
+      </div>
+      </form> 
       </div>
   );
 };

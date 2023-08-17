@@ -6,10 +6,13 @@ export const CreateBlog = ({ userId }) => {
   const [content, setContent] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [contentExists, setContentExists] = useState(false);
 
   const handleAddHeading = () => {
     setContent([...content, { type: 'heading', text: inputValue }]);
     setInputValue('');
+    setContentExists(true); // Update the state
+    console.log("Content exists:", contentExists);
   };
 
   const handleAddParagraph = () => {
@@ -24,9 +27,8 @@ export const CreateBlog = ({ userId }) => {
 
   const handleSaveBlog = () => {
   };
-
   return (
-    
+
     <div className=" pb-4 px-4 ">
   <div
     className="absolute inset-0 flex flex-col justify-center items-center p-8 sm:p-16 lg:p-32"
@@ -39,16 +41,19 @@ export const CreateBlog = ({ userId }) => {
   >
     
         <div className="absolute inset-0 bg-black opacity-5"></div>
-        <div className=" mb-8 text-center">
-  <p className="text-2xl text-gray-600">
+       
+        <div className=" mb-8 text-center  ">
+        {!contentExists && (
+  <p className="text-2xl text-gray-600 ">
     "Blogging is your canvas. Your words are the brushstrokes.<br />Let your thoughts flow and create a masterpiece."
   </p>
+  )}
   <p className="mt-4 text-2xl font-semibold text-gray-600">
     Create your blog!
   </p>
 </div>
-
-      <div className="max-w-4xl  mx-auto  bg-[#14191f] text-white p-6 rounded shadow z-10 ">
+       
+      <div className="max-w-4xl mx-auto  bg-[#14191f] text-white p-6 rounded shadow z-10 ">
      
         <div className="mb-4">
           <input
@@ -88,7 +93,7 @@ export const CreateBlog = ({ userId }) => {
       </button>
     </div>
   </div>
-        <div className="mt-4 space-y-4 max-h-96 overflow-y-auto">
+        <div className="mt-4 space-y-4 max-h-72 overflow-y-auto">
           {content.map((item, index) =>
             item.type === 'heading' ? (
               <h2 key={index} className="text-2xl font-semibold break-words">

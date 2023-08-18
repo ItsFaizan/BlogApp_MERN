@@ -65,7 +65,6 @@ export const CreateBlog = ({ userId }) => {
     }}
   >
     
-        <div className="absolute inset-0 bg-black opacity-5"></div>
        
         <div className=" mb-8 text-center  ">
         {!contentExists && (

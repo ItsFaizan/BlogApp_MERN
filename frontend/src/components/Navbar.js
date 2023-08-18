@@ -17,7 +17,7 @@ export const Navbar = () => {
           <Link to="/createblog" onClick={handleClick} className="hover:text-white transition-colors" >Create Blog</Link>
         </li>
         <li>
-          <Link to="/category/technology" onClick={handleClick} className="hover:text-white transition-colors">Technology</Link>
+          <Link to="/profile" onClick={handleClick} className="hover:text-white transition-colors">Profile</Link>
         </li>
         <li>
           <Link to="/category/general" onClick={handleClick} className="hover:text-white transition-colors">General</Link>
@@ -34,9 +34,9 @@ export const Navbar = () => {
       </div>
 
       <ul className={!nav ? 'hidden' : 'md:hidden absolute top-0 left-0 w-full h-screen bg-[#b8def2] flex flex-col justify-center items-center'}>
-        <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/" className="hover:text-white transition-colors">Home</Link> </li>
-        <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/category/sports" className="hover:text-white transition-colors">Sports</Link> </li>
-        <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/category/technology" className="hover:text-white transition-colors">Technology</Link></li>
+        <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/landingpage" className="hover:text-white transition-colors">Home</Link> </li>
+        <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/createblog" className="hover:text-white transition-colors">Create Blog</Link> </li>
+        <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/profile" className="hover:text-white transition-colors">Profile</Link></li>
         <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/category/general" className="hover:text-white transition-colors">General</Link></li>
         <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
       </ul>

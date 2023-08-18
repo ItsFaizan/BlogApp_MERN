@@ -1,4 +1,5 @@
 import { CreateBlog } from "./components/CreateBlog";
+import { EditProfile } from "./components/EditProfile";
 import { Landingpage } from "./components/Landingpage";
 import Login from "./components/Login";
 import { Navbar } from "./components/Navbar";
@@ -15,6 +16,7 @@ function App() {
           <Route path="/landingpage" element={<div><Navbar/><Landingpage /></div>} />
           <Route path="/createblog" element={<div><Navbar/><CreateBlog /></div>} />
           <Route path="/profile" element={<div><Navbar/><Profile /></div>} />
+          <Route path="/editprofile" element={<div><Navbar/><EditProfile /></div>} />
          
        </Routes>
     </BrowserRouter>

@@ -44,7 +44,7 @@ export const Profile = () => {
       backgroundRepeat: 'no-repeat',
     }}
   >
-    <div className="p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-3xl">
+    <div className="p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-4xl">
       <div className="text-center">
         <img
           src={profilepic}
@@ -71,7 +71,9 @@ export const Profile = () => {
                 <td className="px-2 sm:px-4 py-2">{customerinfo.user.fullName}</td>
                 <td className="px-2 sm:px-4 py-2">{customerinfo.user.email}</td>
                 <td className="px-2 sm:px-4 py-2">{customerinfo.user.education}</td>
-                <td className="px-2 sm:px-4 py-2">{customerinfo.user.interests}</td>
+                <td className="px-2 sm:px-4 py-2">
+                {customerinfo.user.interests.filter(interest => interest).join(', ')}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -80,6 +82,7 @@ export const Profile = () => {
           <Link
             to="/editprofile"
             className="bg-gray-600 text-white hover:bg-white hover:text-gray-950 py-2 px-4 rounded-md mr-2"
+            state={{ from: customerinfo }}
           >
             Edit Profile
           </Link>

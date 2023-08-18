@@ -44,7 +44,7 @@ export const ViewBlog = () => {
           {blog.content.map((contentItem, index) => (
             <div key={index} className="mb-4">
               {contentItem.type === 'heading' && <h2 className="text-lg sm:text-xl font-semibold">{contentItem.text}</h2>}
-              {contentItem.type === 'image' && <img src={contentItem.url} alt="Blog Image" className="w-full rounded-lg" />}
+              {contentItem.type === 'image' && <img src={contentItem.url} alt="Blog Image" className="w-full rounded-lg max-w-md mx-auto" />}
               {contentItem.type === 'paragraph' && <p className="text-gray-700">{contentItem.text}</p>}
             </div>
           ))}

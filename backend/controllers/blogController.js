@@ -29,6 +29,12 @@ export const getblog = async (req, res) => {
     res.json(blogs);
   };
 
+  export const getblogdetail = async (req, res) => {
+    const blogId = req.params.id;
+    const blogDetail = await Blog.findById(blogId);
+    res.json(blogDetail);
+  };
+
 export const searchBlogs = async (req, res, next) => {
   try {
     const { query } = req.query;

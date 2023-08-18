@@ -3,9 +3,7 @@ import Blog from "../models/blogModel.js";
 export const CreateBlog = async (req, res,next) => {
     try {
         const blog = await Blog.create({
-            title: req.body.title,
             content: req.body.content,
-            images: req.body.images,
             
         });
   

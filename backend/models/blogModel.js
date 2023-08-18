@@ -10,10 +10,6 @@ const blogSchema = new Schema({
     type: [Object],
     required: true
   },
-  images: {
-    type: [String],
-    required: false
-  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

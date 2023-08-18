@@ -6,6 +6,9 @@ import { Navbar } from "./components/Navbar";
 import { Profile } from "./components/Profile";
 import Register from "./components/Register";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { ViewBlog } from "./components/ViewBlog";
+import { AllBlogs } from "./components/AllBlogs";
+import { BlogDetails } from "./components/BlogDetails";
 
 function App() {
   return (
@@ -17,7 +20,9 @@ function App() {
           <Route path="/createblog" element={<div><Navbar/><CreateBlog /></div>} />
           <Route path="/profile" element={<div><Navbar/><Profile /></div>} />
           <Route path="/editprofile" element={<div><Navbar/><EditProfile /></div>} />
-         
+          <Route path="/viewblogs" element={<div><Navbar/><ViewBlog /></div>} />
+          <Route path="/blogs" element={<div><Navbar/><AllBlogs /></div>} />
+          <Route path="/blogdetails/:id" element={<div><Navbar/><BlogDetails /></div>} />
        </Routes>
     </BrowserRouter>
 

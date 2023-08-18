@@ -54,7 +54,7 @@ export const CreateBlog = ({ userId }) => {
   return (
 
     <div className=" pb-4 px-4 ">
-      <form className='z-10' onSubmit={handleSaveBlog}>
+     
   <div
     className="absolute inset-0 flex flex-col justify-center items-center p-8 sm:p-16 lg:p-32"
     style={{
@@ -141,7 +141,7 @@ export const CreateBlog = ({ userId }) => {
       
       <button
          className="mt-4 px-6 py-2 bg-gray-600 text-white rounded transition duration-300 hover:text-gray-950 hover:bg-white z-10"
-         type="submit" 
+         type="submit" onClick={handleSaveBlog}
       >
        <Link to="/landingpage">
         Publish
@@ -151,7 +151,7 @@ export const CreateBlog = ({ userId }) => {
      
      
       </div>
-      </form> 
+    
       </div>
   );
 };

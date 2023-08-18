@@ -2,8 +2,10 @@ import Blog from "../models/blogModel.js";
 
 export const CreateBlog = async (req, res,next) => {
     try {
+        const userid = req.userid;
         const blog = await Blog.create({
             content: req.body.content,
+            author: userid,
             
         });
   
@@ -44,8 +46,9 @@ export const deleteblog = async (req, res) => {
 };
 
 export const getblog = async (req, res) => {
-    const user = await Blog.findById(req.params.id);
-    res.json({user});
+    const userid = req.userid;
+    const blogs = await Blog.find({ author: userid });
+    res.json(blogs);
   };
 
 export const searchBlogs = async (req, res, next) => {

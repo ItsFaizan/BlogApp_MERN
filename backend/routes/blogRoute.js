@@ -6,7 +6,7 @@ const blogRoute = express.Router();
 blogRoute.post("/upload",verifyToken, CreateBlog);
 blogRoute.put("/:id",verifyToken, updateblog);
 blogRoute.delete("/:id",verifyToken, deleteblog);
-blogRoute.get("/:id",verifyToken, getblog);
+blogRoute.get("/getmyblogs",verifyToken, getblog);
 blogRoute.get("/search",verifyToken, searchBlogs);
 
 export default blogRoute;

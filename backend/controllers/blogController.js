@@ -16,38 +16,16 @@ export const CreateBlog = async (req, res,next) => {
     }
   };
 
-  export const updateblog = async (req, res) => {
-    try{
-    const blog = await Blog.updateOne(
-        {_id:req.params.id},
-        {$set:{
-            title: req.body.title,
-            content: req.body.content,
-            images: req.body.images,
-        }})
-        if(blog){
-            res.json(blog)
-        }
-        else{
-            res.status(404).json('Blog not found')
-        }
-    }catch(err){
-        console.log(err)
-        res.status(500).json({error: "Can't update Blog"})
-    }
-
-};
-
-export const deleteblog = async (req, res) => {
-    
-    await Blog.findByIdAndDelete(req.params.id);
-    res.status(200).send("Blog deleted.");
-
-};
 
 export const getblog = async (req, res) => {
     const userid = req.userid;
     const blogs = await Blog.find({ author: userid });
+    res.json(blogs);
+  };
+
+  export const getallblog = async (req, res) => {
+    const loggedInUserId = req.userid;
+    const blogs = await Blog.find({ author: { $ne: loggedInUserId } });
     res.json(blogs);
   };
 

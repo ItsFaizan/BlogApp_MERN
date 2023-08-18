@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import landingimg from '../assets/blue-surface-with-study-tools.jpg';
 
 export const BlogDetails = () => {
   const { id } = useParams(); 

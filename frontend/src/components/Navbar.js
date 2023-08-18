@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 
 export const Navbar = () => {
+  const [cookies] = useCookies(['accessToken']);
+  const handleLogout = async () =>  {
+   
+      const response = await fetch('/backend/user_auth/user_logout', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookies.accessToken}`,
+  
+      }});
+    };
+
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
 
@@ -26,7 +39,7 @@ export const Navbar = () => {
           <Link to="/blogs" onClick={handleClick} className="hover:text-white transition-colors">Blogs</Link>
         </li>
         <li>
-          <Link to="/" onClick={handleClick} className="hover:text-white transition-colors">Logout</Link>
+          <Link to="/" onClick={handleLogout} className="hover:text-white transition-colors">Logout</Link>
         </li>
       </ul>
 

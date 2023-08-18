@@ -25,6 +25,9 @@ export const Navbar = () => {
         <li>
           <Link to="/blogs" onClick={handleClick} className="hover:text-white transition-colors">Blogs</Link>
         </li>
+        <li>
+          <Link to="/" onClick={handleClick} className="hover:text-white transition-colors">Logout</Link>
+        </li>
       </ul>
 
       <div className='md:hidden z-10 ml-auto'>

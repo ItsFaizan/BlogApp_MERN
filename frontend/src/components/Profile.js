@@ -72,7 +72,7 @@ export const Profile = () => {
                 <td className="px-2 sm:px-4 py-2">{customerinfo.user.email}</td>
                 <td className="px-2 sm:px-4 py-2">{customerinfo.user.education}</td>
                 <td className="px-2 sm:px-4 py-2">
-                {customerinfo.user.interests.filter(interest => interest).join(', ')}
+                {customerinfo?.user?.interests?.filter(interest => interest).join(', ')}
                 </td>
               </tr>
             </tbody>

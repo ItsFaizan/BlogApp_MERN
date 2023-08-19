@@ -118,7 +118,7 @@ export const CreateBlog = ({ userId }) => {
     </div>
   </div>
         <div className="mt-4 space-y-4 max-h-72 overflow-y-auto">
-          {content.map((item, index) =>
+          {content?.map((item, index) =>
             item.type === 'heading' ? (
               <h2 key={index} className="text-2xl font-semibold break-words">
                 {item.text}

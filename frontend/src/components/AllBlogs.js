@@ -32,12 +32,12 @@ export const AllBlogs = () => {
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-600 mb-10 sm:mb-4 md:mt-8 text-center">
           Blogs
         </h1>
-        {bloginfo.map((blog, index) => (
+        {bloginfo?.map((blog, index) => (
           <div
             key={blog._id}
             className="p-4 sm:p-6 md:p-8 rounded-lg shadow-md mb-4"
           >
-            {blog.content.map((contentItem, index) => (
+            {blog?.content?.map((contentItem, index) => (
               <div key={index} className="mb-4">
                 {contentItem.type === 'heading' && (
                   <h2 className="text-lg sm:text-xl font-semibold">

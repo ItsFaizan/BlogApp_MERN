@@ -35,6 +35,22 @@ export const getblog = async (req, res) => {
     res.json(blogDetail);
   };
 
+  export const addclap = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const blog = await Blog.findById(id);
+      blog.claps += 1;
+      await blog.save();
+  
+      // Return a success response to the client
+      res.status(200).json({ message: 'Clap added successfully', claps: blog.claps });
+    } catch (error) {
+      // Return an error response in case of any issues
+      res.status(500).json({ message: 'Error adding clap' });
+    }
+  };
+  
+
 export const searchBlogs = async (req, res, next) => {
   try {
     const { query } = req.query;

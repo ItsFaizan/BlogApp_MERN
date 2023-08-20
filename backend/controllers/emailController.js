@@ -1,34 +1,31 @@
 import nodemailer from 'nodemailer';
 
-export const sendEmail = async (req, res, next) => {
+export const sendEmailToAuthor = async (req, res) => {
+  const { to, subject, text } = req.body;
+
+
   try {
-    const { recipientEmail, subject, message } = req.body;
-
-    if (!recipientEmail || !subject || !message) {
-      res.status(400).json({ error: 'Missing email details.' });
-      return;
-    }
-
- 
     const transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.Email,
+        pass: process.env.Password,
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: recipientEmail,
-      subject: subject,
-      text: message,
+      from: process.env.Email,
+      to, 
+      subject,
+      text,
     };
 
     await transporter.sendMail(mailOptions);
-
-    res.status(200).json({ message: 'Email sent successfully.' });
-  } catch (err) {
-    next(err);
+    res.status(200).json({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error sending email' });
   }
 };

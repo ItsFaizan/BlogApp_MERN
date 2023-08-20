@@ -42,10 +42,9 @@ export const getblog = async (req, res) => {
       blog.claps += 1;
       await blog.save();
   
-      // Return a success response to the client
+     
       res.status(200).json({ message: 'Clap added successfully', claps: blog.claps });
     } catch (error) {
-      // Return an error response in case of any issues
       res.status(500).json({ message: 'Error adding clap' });
     }
   };

@@ -7,7 +7,27 @@ export const BlogDetails = () => {
   const [blogDetail, setBlogDetail] = useState({});
   const [claps, setClaps] = useState(0);
   const [hasClapped, setHasClapped] = useState(false);
+  const [authorEmail, setAuthorEmail] = useState(); 
+  const [emailSubject, setEmailSubject] = useState('');
+  const [emailText, setEmailText] = useState('');
   const [cookies] = useCookies(['accessToken']); 
+
+  const fetchAuthorEmail = async (authid) => {
+    try {
+      const response = await fetch(`/backend/users/${authid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+      });
+      const authorData = await response.json();
+      setAuthorEmail(authorData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
     const handleClap = async () => {
           const response = await fetch(`/backend/blog/${id}/clap`, {
@@ -19,6 +39,7 @@ export const BlogDetails = () => {
           });
         setHasClapped(true);
         setClaps(prevClaps => prevClaps + 1);
+      
     };
     
   
@@ -36,17 +57,42 @@ export const BlogDetails = () => {
         const data = await response.json();
         setBlogDetail(data);
         setClaps(data.claps);
-        
+        if (data.author) {
+          fetchAuthorEmail(data.author); 
+        }
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchBlogDetail();
+    
   }, [cookies.accessToken, id, setClaps]);
 
-
-
+  const sendEmailToAuthor = async () => {
+    try {
+      const response = await fetch(`/backend/blog/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+        body: JSON.stringify({
+          to: (authorEmail && authorEmail.user.email),
+          subject: emailSubject, 
+          text: emailText, 
+        }),
+      });
+  
+      if (response.ok) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Error sending email');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   
 
@@ -61,6 +107,7 @@ export const BlogDetails = () => {
               {contentItem.type === 'image' && <img src={contentItem.url} alt="Blog Image" className="w-full rounded-lg max-w-md mx-auto" />}
               {contentItem.type === 'paragraph' && <p>{contentItem.text}</p>}
             </div>
+            
           ))}
       </div>
 
@@ -76,7 +123,41 @@ export const BlogDetails = () => {
             </button>
             <p className="ml-2">{claps} claps</p>
           </div>
+
+          
+      <div className="container mx-auto p-6 ">
+        <h1 className="text-2xl font-bold mb-4">Author: {authorEmail && authorEmail.user.fullName}</h1>
+        <div className="mb-4">
+          <a href={`mailto:${authorEmail && authorEmail.user.email}`} className="text-blue-600 hover:underline">
+           Email to Author: {authorEmail && authorEmail.user.email}
+          </a>
+        </div>
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Enter email subject"
+            value={emailSubject}
+            onChange={(e) => setEmailSubject(e.target.value)}
+            className="px-4 py-2 border rounded-md w-full sm:w-auto mb-2 sm:mb-0"
+          />
+        </div>
+        <div className="mb-4">
+          <textarea
+            placeholder="Enter email text"
+            value={emailText}
+            onChange={(e) => setEmailText(e.target.value)}
+            className="px-4 py-2 border rounded-md w-full sm:w-auto"
+          ></textarea>
+        </div>
+        <button
+          onClick={sendEmailToAuthor}
+          className="bg-blue-600 text-white hover:bg-white hover:text-blue-600 px-4 py-2 rounded-md"
+        >
+          Send Email
+        </button>
+      </div>
     </div>
+
   );
 };
 

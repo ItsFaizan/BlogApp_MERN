@@ -1,7 +1,6 @@
 import React from 'react'
 import { useCookies } from 'react-cookie'
 import { useState, useEffect } from 'react'
-import landingimg from '../assets/blue-surface-with-study-tools.jpg'
 import { Link } from 'react-router-dom'
 
 export const AllBlogs = () => {
@@ -47,6 +46,7 @@ export const AllBlogs = () => {
                 )}      
               </div>
             ))}
+
             <button
               className="bg-gray-600 text-white py-2 px-4 rounded hover:bg-white hover:text-gray-950"
             >
@@ -55,6 +55,9 @@ export const AllBlogs = () => {
                   </Link>
             </button>
           </div>
+
+          
+          
         ))}
       </div>
     

@@ -28,11 +28,11 @@ export const ViewBlog = () => {
   }, [cookies.accessToken]);
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-[#b8def2] min-h-screen">
     <div
       className="p-4 sm:p-8 lg:p-16 "
       style={{
-        backgroundImage: `url(${landingimg})`,
+        
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

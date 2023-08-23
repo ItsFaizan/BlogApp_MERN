@@ -43,7 +43,8 @@ export const AllBlogs = () => {
                     {contentItem.text}
                   </h2>
                   
-                )}      
+                )} 
+                {contentItem.type === 'image' && <img src={contentItem.url} alt="Blog Image" className="w-full rounded-lg max-w-md mx-auto" />}     
               </div>
             ))}
 

@@ -10,6 +10,8 @@ export const BlogDetails = () => {
   const [authorEmail, setAuthorEmail] = useState(); 
   const [emailSubject, setEmailSubject] = useState('');
   const [emailText, setEmailText] = useState('');
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
   const [cookies] = useCookies(['accessToken']); 
 
   const fetchAuthorEmail = async (authid) => {
@@ -42,6 +44,28 @@ export const BlogDetails = () => {
       
     };
     
+    const postComment = async () => {
+      try {
+        const response = await fetch(`/backend/blog/${id}/comments`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${cookies.accessToken}`,
+          },
+          body: JSON.stringify({ text: newComment }),
+        });
+    
+        if (response.ok) {
+          const commentData = await response.json();
+          setComments([...comments, commentData]);
+          setNewComment('');
+        } else {
+          console.error('Error posting comment');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
   
   useEffect(() => {
     
@@ -54,9 +78,12 @@ export const BlogDetails = () => {
             Authorization: `Bearer ${cookies.accessToken}`,
           },
         });
+
         const data = await response.json();
         setBlogDetail(data);
         setClaps(data.claps);
+        setComments(data.comments);
+        console.log(data);
         if (data.author) {
           fetchAuthorEmail(data.author); 
         }
@@ -93,8 +120,6 @@ export const BlogDetails = () => {
       console.error(error);
     }
   };
-  
-  
 
   return (
     <div className='pt-24 bg-[#b8def2]'> 
@@ -151,10 +176,35 @@ export const BlogDetails = () => {
         </div>
         <button
           onClick={sendEmailToAuthor}
-          className="bg-blue-600 text-white hover:bg-white hover:text-blue-600 px-4 py-2 rounded-md"
+          className="bg-gray-600 text-white hover:bg-white hover:text-gray-600 px-4 py-2 rounded-md"
         >
           Send Email
         </button>
+
+        <div className="mt-8">
+  <h2 className="text-xl font-semibold mb-4">Comments</h2>
+  {comments.map((comment, index) => (
+    <div key={index} className="border p-3 mb-3">
+      <p>{comment.text}</p>
+    </div>
+  ))}
+</div>
+
+<div className="mt-8">
+  <h2 className="text-xl font-semibold mb-4">Add a Comment</h2>
+  <textarea
+    placeholder="Enter your comment..."
+    value={newComment}
+    onChange={(e) => setNewComment(e.target.value)}
+    className="px-4 py-2 border rounded-md w-full"
+  />
+  <button
+    onClick={postComment}
+    className="bg-gray-600 text-white hover:bg-white hover:text-gray-600 px-4 py-2 rounded-md mt-2"
+  >
+    Post Comment
+  </button>
+</div>
       </div>
     </div>
 

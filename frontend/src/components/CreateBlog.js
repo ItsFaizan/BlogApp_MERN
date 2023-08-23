@@ -143,7 +143,7 @@ export const CreateBlog = ({ userId }) => {
          className="mt-4 px-6 py-2 bg-gray-600 text-white rounded transition duration-300 hover:text-gray-950 hover:bg-white z-10"
          type="submit" onClick={handleSaveBlog}
       >
-       <Link to="/landingpage">
+       <Link to="/viewblogs">
         Publish
         </Link>
        

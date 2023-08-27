@@ -9,6 +9,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { ViewBlog } from "./components/ViewBlog";
 import { AllBlogs } from "./components/AllBlogs";
 import { BlogDetails } from "./components/BlogDetails";
+import { LikedBlogsPage } from "./components/LikedBlogs";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/editprofile" element={<div><Navbar/><EditProfile /></div>} />
           <Route path="/viewblogs" element={<div><Navbar/><ViewBlog /></div>} />
           <Route path="/blogs" element={<div><Navbar/><AllBlogs /></div>} />
+          <Route path="/likedblogs" element={<div><Navbar/><LikedBlogsPage /></div>} />
           <Route path="/blogdetails/:id" element={<div><Navbar/><BlogDetails /></div>} />
        </Routes>
     </BrowserRouter>

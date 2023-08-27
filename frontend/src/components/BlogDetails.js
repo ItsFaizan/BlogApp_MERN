@@ -12,6 +12,8 @@ export const BlogDetails = () => {
   const [emailText, setEmailText] = useState('');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+  const [hasLiked, setHasLiked] = useState(false);
+  const [likedBlogs, setLikedBlogs] = useState([]);
   const [cookies] = useCookies(['accessToken']); 
 
   const fetchAuthorEmail = async (authid) => {
@@ -66,6 +68,28 @@ export const BlogDetails = () => {
         console.error(error);
       }
     };
+
+    const handleLike = async () => {
+      try {
+        const response = await fetch(`/backend/users/${id}/like`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${cookies.accessToken}`,
+          },
+          body: JSON.stringify({ blogId: id }), 
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setLikedBlogs([...likedBlogs, data]);
+        } else {
+          console.error('Error liking blog');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
   
   useEffect(() => {
     
@@ -205,6 +229,19 @@ export const BlogDetails = () => {
     Post Comment
   </button>
 </div>
+
+<div className="flex items-center justify-end">
+  <button
+    onClick={handleLike}
+    className={`bg-gray-600 text-white hover:bg-white hover:text-gray-950 px-4 py-2 rounded-md ${
+      hasLiked ? 'cursor-not-allowed' : 'cursor-pointer'
+    }`}
+    disabled={hasLiked}
+  >
+    {hasLiked ? 'Liked' : 'Like'}
+  </button>
+</div>
+
       </div>
     </div>
 

@@ -39,6 +39,9 @@ export const Navbar = () => {
           <Link to="/blogs" onClick={handleClick} className="hover:text-white transition-colors">Blogs</Link>
         </li>
         <li>
+          <Link to="/likedblogs" onClick={handleClick} className="hover:text-white transition-colors">Liked Blogs</Link>
+        </li>
+        <li>
           <Link to="/" onClick={handleLogout} className="hover:text-white transition-colors">Logout</Link>
         </li>
       </ul>
@@ -55,6 +58,7 @@ export const Navbar = () => {
         <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/profile" className="hover:text-white transition-colors">Profile</Link></li>
         <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/viewblogs" className="hover:text-white transition-colors">MyBlogs</Link></li>
         <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/blogs" className="hover:text-white transition-colors">Blogs</Link></li>
+        <li className='py-6 text-4xl'> <Link onClick={handleClick} to="/likedblogs" className="hover:text-white transition-colors">Liked Blogs</Link></li>
       </ul>
       </div>
     

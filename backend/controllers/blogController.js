@@ -49,6 +49,24 @@ export const getblog = async (req, res) => {
     }
   };
   
+  export const addcomment = async (req, res) => {
+    const { id } = req.params;
+    const { text } = req.body;
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          comments: {
+            user: req.user._id, 
+            text,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    res.json(updatedBlog);
+  };
 
 export const searchBlogs = async (req, res, next) => {
   try {
